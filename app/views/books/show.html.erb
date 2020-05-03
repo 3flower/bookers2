@@ -17,6 +17,10 @@
 				</td>
 				<td><%= link_to @book_show.title, @book %></td>
 				<td><%= @book_show.body %></td>
+				<td>ハート</td>
+				<td>
+					<%= @book_show.book_comments.count %>件コメント
+				</td>
 				<% if @book_show.user == current_user %>
 				<td><%= link_to "Edit",edit_book_path(@book_show), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
 
@@ -24,6 +28,28 @@
 				<% end %>
 			</tr>
 		</table>
+		<p>コメント</p>
+		<table class="table">
+			<% @book_show.book_comments.each do |comment| %>
+				<tr>
+					<%= link_to (@user) do %>
+					<td>
+						<%= attachment_image_tag(current_user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg") %>
+					</td>
+					<td>
+						<%= @user.name %>
+					</td>
+					<% end %>
+					<td><%= comment.comment %></td>
+					<td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+				</tr>
+			<% end %>
+		</table>
+		<p>コメント投稿</p>
+		<%= form_for [@book_show,@book_comment] do |f| %>
+			<%= f.text_area :comment, class: "col-xs-10" %><br>
+			<%= f.submit "送信", class: "btn btn-primary col-xs-1" %>
+		<% end %>
 	</div>
 </div>
 
