@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users,only: [:show,:index,:edit,:update]
+  resources :relationships, only: [:create, :destroy]
 
   resources :books do
   	resources :book_comments, only: [:create, :destroy]
@@ -11,6 +12,3 @@ Rails.application.routes.draw do
   get "home/about" => "homes#about"
 
 end
-
-#POST	/books/:book_id/favorites(.:format)	favorites#create book_favorite_path
-#	DELETE	/books/:book_id/favorites/:id(.:format)	favorites#destroy
