@@ -25,6 +25,21 @@
 		<tr>
 			<td><%= attachment_image_tag(user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg") %></td>
 			<td><%= user.name%></td>
+			<td>
+				<%= link_to follows_user_path(user) do %>
+					フォロー数：<%= user.followings.count %>
+				<% end %>
+			</td>
+			<td>
+				<%= link_to followers_user_path(user) do %>
+					フォロワー数：<%= user.followers.count %>
+				<% end %>
+			</td>
+			<td>
+				<% if user != current_user %>
+					<%= render "relationships/follow_button", user: user %>
+				<% end %>
+			</td>
 			<td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
 		</tr>
 		<% end %>
