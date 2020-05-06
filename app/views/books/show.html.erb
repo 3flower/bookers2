@@ -1,6 +1,5 @@
 <div class="row">
 	<div class="col-xs-3">
-		<h2>User info</h2>
 		<%= render 'users/profile',  user: @user %>
 		<h2>New book</h2>
 		<%= render 'newform', book: @book %>
@@ -8,43 +7,14 @@
 	<div class="col-xs-9">
 		<h2>Book detail</h2>
 		<table class="table">
+			<%= render "layouts/table_thead" %>
+
+			<tbody>
 			<tr>
-				<td>
-					<%= link_to (@user) do %>
-					<%= attachment_image_tag(@user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg") %><br>
-					<%= @user.name %>
-					<% end %>
-				</td>
-				<td><%= link_to @book_show.title, @book %></td>
-				<td><%= @book_show.body %></td>
-
-					<% if @book_show.favorited_by?(current_user) %>
-					<td>
-						<%= link_to book_favorites_path(@book_show), method: :delete do %>
-						<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
-						<%= @book_show.favorites.count %>
-						<% end %>
-					</td>
-
-					<% else %>
-
-					<td>
-						<%= link_to book_favorites_path(@book_show), method: :post do %>
-						<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-						<%= @book_show.favorites.count %>
-						<% end %>
-					</td>
-					<% end %>
-
-				<td>
-					<%= @book_show.book_comments.count %>件コメント
-				</td>
-				<% if @book_show.user == current_user %>
-				<td><%= link_to "Edit",edit_book_path(@book_show), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
-
-				<td><%= link_to "Destroy", @book_show, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
-				<% end %>
+				<%= render "layouts/book_table", user: @user, book: @book_show %>
+				<%= render "layouts/edit_destroy_btn", book: @book_show %>
 			</tr>
+			</tbody>
 		</table>
 		<p>コメント</p>
 		<table class="table">
@@ -80,4 +50,3 @@
 		<% end %>
 	</div>
 </div>
-
