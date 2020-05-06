@@ -55,7 +55,8 @@
       </div>
     </header>
     <!--ヘッダーの記述-->
-    <div class="container">
+    <div class="container">  
+      <%= render "searchs/search_form" %>
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
       <%= yield %>
     </div>

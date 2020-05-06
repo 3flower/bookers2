@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :relationships, only: [:create, :destroy]
 
   resources :books do
@@ -15,5 +16,6 @@ Rails.application.routes.draw do
 
   root 'homes#top'
   get "home/about" => "homes#about"
+  get "search" => "searchs#search"
 
 end
