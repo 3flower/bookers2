@@ -19,4 +19,18 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
     #sign_upの際にnameのデータ操作を許。追加したカラム。
   end
+
+	private
+
+	def set_book
+		@book = Book.find(params[:id])
+	end
+
+	def book_params
+		@book = Book.find(params[:book_id])
+	end
+
+	def set_user
+		@user = User.find(params[:id])
+	end
 end

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 	before_action :baria_user, only: [:update, :edit, :destroy]
+	before_action :set_user, only: [:show, :edit, :update, :follows, :followers]
 
   def show
-  	@user = User.find(params[:id])
   	@books = @user.books
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
   end
@@ -13,11 +13,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-  	@user = User.find(params[:id])
   end
 
   def update
-  	@user = User.find(params[:id])
   	if @user.update(user_params)
   		redirect_to @user, notice: "successfully updated user!"
   	else
@@ -26,13 +24,10 @@ class UsersController < ApplicationController
   end
 
 	def follows
-		@user = User.find(params[:id])
 		@users = @user.followings
 	end
 
-
 	def followers
-		@user = User.find(params[:id])
 		@users = @user.followers
 	end
 

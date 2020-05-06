@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-xs-3">
     <%= render 'users/profile', user: current_user %>
+		<h2>New book</h2>
     <%= render 'books/newform', book: @book %>
 	</div>
 
@@ -8,43 +9,8 @@
     <% if @user_or_book == "users"%>
       <h1>User</h1>
       <table class="table">
-        <thead>
-          <tr>
-            <th>image</th>
-            <th>name</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-
         <% @users.each do |user| %>
-          <tbody>
-            <tr>
-              <td>
-                <%= attachment_image_tag(user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg") %>
-              </td>
-              <td>
-                <%= user.name %>
-              </td>
-              <td>
-        				<%= link_to follows_user_path(user) do %>
-        					フォロー数：<%= user.followings.count %>
-        				<% end %>
-        			</td>
-        			<td>
-        				<%= link_to followers_user_path(user) do %>
-        					フォロワー数：<%= user.followers.count %>
-        				<% end %>
-        			</td>
-              <td>
-        				<% if user != current_user %>
-        					<%= render "relationships/follow_button", user: user %>
-        				<% end %>
-        			</td>
-        			<td>
-                <%= link_to "Show", user, class: "user_#{user.id}" %>
-              </td>
-            </tr>
-          </tbody>
+          <%= render "users/follow", users: @users %>
         <% end %>
       </table>
 
@@ -52,56 +18,14 @@
 
       <h2>Book</h2>
       <table class="table">
-        <thead>
-          <tr>
-            <th>image</th>
-            <th>name</th>
-            <th>Title</th>
-            <th>Opinion</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
+        <%= render "layouts/table_thead" %>
 
         <% @books.each do |book| %>
           <tbody>
             <tr>
-    					<td>
-    						<%= link_to(book.user) do %>
-    							<%= attachment_image_tag(book.user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg") %>
-    						<% end %>
-    					</td>
-
-    					<td><%= book.user.name%></td>
-
-    					<td>
-    						<%= link_to book.title, book, class: "book_#{book.id}" %>
-    					</td>
-    					<td><%= book.body %></td>
-
-    					<% if book.favorited_by?(current_user) %>
-    					<td>
-    						<%= link_to book_favorites_path(book), method: :delete do %>
-    						<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
-    						<%= book.favorites.count %>
-    						<% end %>
-    					</td>
-
-    					<% else %>
-
-    					<td>
-    						<%= link_to book_favorites_path(book), method: :post do %>
-    						<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-    						<%= book.favorites.count %>
-    						<% end %>
-    					</td>
-    					<% end %>
-
-    					<td>
-    						<%= link_to(book) do %>
-    							<%= book.book_comments.count %>件コメント
-    						<% end %>
-    					</td>
-    				</tr>
+    					<%= render "layouts/book_table", user: book.user, book: book %>
+							<%= render "layouts/edit_destroy_btn", book: book %>
+						</tr>
           </tbody>
         <% end %>
       </table>

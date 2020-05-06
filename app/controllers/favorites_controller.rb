@@ -1,6 +1,7 @@
 class FavoritesController < ApplicationController
+
+	before_action :book_params
 	def create
-		@book = Book.find(params[:book_id])
 		@favorite = current_user.favorites.new(book_id: @book.id)
 		@favorite.save
 		redirect_back(fallback_location: books_path)
@@ -12,4 +13,5 @@ class FavoritesController < ApplicationController
 		@favorite.destroy
 		redirect_back(fallback_location: books_path)
 	end
+
 end
