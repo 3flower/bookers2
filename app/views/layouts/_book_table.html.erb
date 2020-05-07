@@ -5,5 +5,9 @@
 <td>
   <%= book.body %>
 </td>
+<td id="book_<%= book.id %>">
 <%= render "favorites/favorite", book: book %>
-<%= render "book_comments/comment", book: book %>
+</td>
+<td>
+<%= render "book_comments/comment_count", book: book %>
+</td>

@@ -10,13 +10,18 @@
 			<%= render "layouts/table_thead" %>
 
 			<tbody>
-			<tr>
+			<tr  id="book-<%= @book.id %>">
 				<%= render "layouts/book_table", user: @user, book: @book %>
 				<%= render "layouts/edit_destroy_btn", book: @book %>
 			</tr>
 			</tbody>
 		</table>
-		<%= render "book_comments/comment_views_form",
-		book: @book, user: @user, book_comment: @book_comment  %>
+		<div id="comments-<%= @book.id %>">
+		<%= render "book_comments/comment_index",
+		book: @book, user: @user %>
+		</div>
+
+		<%= render "book_comments/comment_form",
+		book: @book, book_comment: @book_comment %>
 	</div>
 </div>

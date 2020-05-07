@@ -1,0 +1,20 @@
+<p>コメント</p>
+<table class="table">
+  <% book.book_comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= attachment_image_tag(comment.user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg") %><br>
+        <%= link_to (user) do %>
+          <%= comment.user.name %>
+        <% end %>
+      </td>
+
+      <td><%= comment.comment %></td>
+      <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+      <% if comment.user == current_user %>
+      <td><%= link_to "Destroy", book_book_comment_path(book.id, comment.id), method: :delete, remote: true, class: "btn-sm btn-danger destroy_book_#{@book.id}" %>
+      </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
