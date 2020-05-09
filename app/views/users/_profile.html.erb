@@ -30,6 +30,15 @@
 				<% end %>
 			</th>
 		</tr>
+
+		<% if user == current_user %>
+		<tr>
+			<th>住所</th>
+			<th id="address">
+				<%= user.address %>
+			</th>
+		</tr>
+		<% end %>
 </table>
 
 <div class="row">

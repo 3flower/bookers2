@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!, except: [:top, :about]
+
 	#デバイス機能実行前にconfigure_permitted_parametersの実行をする。
 	protect_from_forgery with: :exception
 
@@ -16,8 +17,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
+    devise_parameter_sanitizer.permit(:sign_up,
+			 keys: [:name, :email, :postal_code, :prefecture_code, :city, :street])
     #sign_upの際にnameのデータ操作を許。追加したカラム。
+		devise_parameter_sanitizer.permit(:sign_in, keys: [:name]) # ログイン時はnameを使用
   end
 
 	private
@@ -33,4 +36,5 @@ class ApplicationController < ActionController::Base
 	def set_user
 		@user = User.find(params[:id])
 	end
+
 end

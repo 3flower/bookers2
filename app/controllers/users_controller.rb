@@ -42,4 +42,8 @@ class UsersController < ApplicationController
   		redirect_to user_path(current_user)
   	end
    end
+
+	 # def zipedit
+		#  params.require(:user).permit(:postal_code, :prefecture_name, :city, :street, :building)
+	 # end
 end

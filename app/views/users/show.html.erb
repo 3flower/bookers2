@@ -3,6 +3,9 @@
 		<%= render 'users/profile', user: @user %>
 		<h2>New book</h2>
 		<%= render 'books/newform', book: @book %>
+		<% if @user == current_user %>
+		<%= render "gmap", user: @user %>
+		<% end %>
 	</div>
 	<div class="col-xs-9">
 		<h2>User</h2>

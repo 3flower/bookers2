@@ -6,6 +6,10 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!-- 住所の自動入力 -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -55,7 +59,7 @@
       </div>
     </header>
     <!--ヘッダーの記述-->
-    <div class="container">  
+    <div class="container">
       <%= render "searchs/search_form" %>
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
       <%= yield %>

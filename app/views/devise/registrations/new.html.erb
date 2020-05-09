@@ -28,6 +28,25 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_confirm" %>
   </div>
+<!-- 住所登録フォーム  -->
+  <div class="field">
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :prefecture_code %><br>
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, include_blank: '都道府県' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city, autofocus: true, autocomplete: "city", id:"address_city" %>
+  </div>
+  <div class="field">
+    <%= f.label :street%><br>
+    <%= f.text_field :street, autofocus: true, id: "address_street" %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Sign up",class: "btn btn-success" %>
