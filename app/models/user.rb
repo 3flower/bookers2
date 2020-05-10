@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :user
   attachment :profile_image, destroy: false
   after_create :address
+  after_create :send_thenks_mail
 
   # rails console JpPrefecture::Prefecture.allすると
   # @code：都道府県コード（1~47）
@@ -86,5 +87,9 @@ class User < ApplicationRecord
 
   def address
     self.address = self.prefecture_code + self.city + self.street
+  end
+
+  def send_thenks_mail
+    UserMailer.user_thanks_mail(self).deliver
   end
 end
