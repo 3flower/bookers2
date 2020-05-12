@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :users,only: [:show,:index,:edit,:update] do
     member do
@@ -17,5 +18,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   get "home/about" => "homes#about"
   get "search" => "searchs#search"
+  get "chat" => "chat#show"
+  get "chat/top" => "chat#top"
 
 end

@@ -1,0 +1,18 @@
+<if user_signed_in? %>
+  <h2>トークルーム作成</h2>
+  <%= form_with model: @room do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+  <% end %>
+
+  <h2>参加済トークルーム一覧</h2>
+  <% @rooms.each do |room| %>
+    <%= room.name %>
+  <% end %>
+
+  <h2>未参加トークルーム一覧</h2>
+  <% @nonroom.each do |room| %>
+    <%= room.name %>
+  <% emd %>
+<% end %>

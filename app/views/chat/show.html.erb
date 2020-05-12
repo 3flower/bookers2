@@ -1,0 +1,8 @@
+<p><%= "ルーム名：#{@room.name}" %></p>
+
+<div id="posts">
+  <%= render "caht", caht: @cahts %>
+</div>
+
+
+<input type="text" data-behavior="room_speaker">
